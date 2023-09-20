@@ -2,7 +2,6 @@ package com.weatherapp.business;
 
 import com.weatherapp.domain.CityService;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,7 +11,7 @@ public class CitiesService {
     @Resource
     private CityService cityService;
 
-    @Autowired
+    @Resource
     private RestTemplate restTemplate;
 
     public void addCityForDataReceiving(String cityName) {
