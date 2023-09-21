@@ -1,4 +1,4 @@
-package com.weatherapp.domain;
+package com.weatherapp.domain.city;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.weatherapp.domain;
+package com.weatherapp.domain.city;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"city\"")
+@Table(name = "city")
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,17 +28,17 @@ public class City {
     private BigDecimal longitude;
 
     @NotNull
-    @Column(name = "latitude", nullable = false, precision = 9, scale = 6)
+    @Column(name = "latitude", nullable = false, precision = 3, scale = 6)
     private BigDecimal latitude;
 
     @Size(max = 10)
     @NotNull
-    @Column(name = "country", nullable = false)
+    @Column(name = "country", nullable = false, length = 10)
     private String country;
 
     @Size(max = 100)
     @NotNull
-    @Column(name = "state", nullable = false)
+    @Column(name = "state", nullable = false, length = 100)
     private String state;
 
     @NotNull

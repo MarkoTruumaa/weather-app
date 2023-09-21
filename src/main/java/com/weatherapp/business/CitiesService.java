@@ -1,6 +1,6 @@
 package com.weatherapp.business;
 
-import com.weatherapp.domain.CityService;
+import com.weatherapp.domain.city.CityService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
