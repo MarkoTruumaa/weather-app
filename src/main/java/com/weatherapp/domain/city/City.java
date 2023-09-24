@@ -36,11 +36,6 @@ public class City {
     @Column(name = "country", nullable = false, length = 10)
     private String country;
 
-    @Size(max = 100)
-    @NotNull
-    @Column(name = "state", nullable = false, length = 100)
-    private String state;
-
     @NotNull
     @Column(name = "status", nullable = false, length = Integer.MAX_VALUE)
     private String status;

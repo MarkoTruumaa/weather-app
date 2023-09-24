@@ -6,11 +6,11 @@ import static com.weatherapp.validation.Error.*;
 public class ValidationService {
 
 
-    public static void validateCityNameUsage(boolean cityNameInuse) {
-        if (cityNameInuse) {
+    public static void validateCityNameUsage(boolean cityNameExists) {
+        if (cityNameExists) {
             throw new BusinessException(
-                    CITY_NAME_INUSE.getErrorMessage(),
-                    CITY_NAME_INUSE.getErrorCode());
+                    CITY_NAME_EXISTS.getErrorMessage(),
+                    CITY_NAME_EXISTS.getErrorCode());
         }
     }
 }

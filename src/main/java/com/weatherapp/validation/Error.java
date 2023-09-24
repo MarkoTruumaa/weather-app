@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum Error {
 
-    CITY_NAME_INUSE("Antud linna nimi on juba süsteemis ja andmed kättesaadavad", 111),
+    CITY_NAME_EXISTS("Antud linna nimi on juba süsteemis ja andmed kättesaadavad", 111),
     ;
 
 

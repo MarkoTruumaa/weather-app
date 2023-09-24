@@ -1,15 +1,14 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-09-16 07:31:11.929
+-- Last modification date: 2023-09-23 14:38:07.619
 
 -- tables
 -- Table: city
 CREATE TABLE city (
     id serial  NOT NULL,
     name varchar(255)  NOT NULL,
-    longitude decimal(3,6)  NOT NULL,
-    latitude decimal(3,6)  NOT NULL,
+    longitude decimal(15,7)  NOT NULL,
+    latitude decimal(15,7)  NOT NULL,
     country varchar(10)  NOT NULL,
-    state varchar(100)  NOT NULL,
     status char(1)  NOT NULL,
     CONSTRAINT city_pk PRIMARY KEY (id)
 );
@@ -25,7 +24,10 @@ CREATE TABLE city_measurement (
 -- Table: measurement
 CREATE TABLE measurement (
     id serial  NOT NULL,
-    name varchar(255)  NOT NULL,
+    temperature decimal(5,2)  NOT NULL,
+    wind_speed int  NOT NULL,
+    humidity int  NOT NULL,
+    date timestamp  NOT NULL,
     CONSTRAINT measurement_pk PRIMARY KEY (id)
 );
 

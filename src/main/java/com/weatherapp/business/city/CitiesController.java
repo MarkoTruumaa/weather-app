@@ -1,4 +1,4 @@
-package com.weatherapp.business;
+package com.weatherapp.business.city;
 
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +13,7 @@ public class CitiesController {
 
 
     @PostMapping("/city")
-    public void addCityForDataReceiving(@RequestParam String cityName) {
-        citiesService.addCityForDataReceiving(cityName);
+    public void addCityToDatabase(@RequestParam String cityName) {
+        citiesService.addCityToDatabase(cityName);
     }
 }

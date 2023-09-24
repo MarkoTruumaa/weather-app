@@ -2,9 +2,11 @@ package com.weatherapp.domain.measurement;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -16,9 +18,20 @@ public class Measurement {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Size(max = 255)
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "temperature", nullable = false, precision = 5, scale = 2)
+    private BigDecimal temperature;
+
+    @NotNull
+    @Column(name = "wind_speed", nullable = false)
+    private Integer windSpeed;
+
+    @NotNull
+    @Column(name = "humidity", nullable = false)
+    private Integer humidity;
+
+    @NotNull
+    @Column(name = "date", nullable = false)
+    private Instant dateTime;
 
 }
