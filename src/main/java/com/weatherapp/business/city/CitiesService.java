@@ -8,7 +8,7 @@ import com.weatherapp.business.data.dto.WeatherData;
 import com.weatherapp.domain.city.City;
 import com.weatherapp.domain.city.CityMapper;
 import com.weatherapp.domain.city.CityService;
-import com.weatherapp.domain.measurement.CityMeasurementData;
+import com.weatherapp.business.city.dto.CityMeasurementData;
 import com.weatherapp.domain.measurement.Measurement;
 import com.weatherapp.domain.measurement.MeasurementMapper;
 import com.weatherapp.domain.measurement.MeasurementsService;
@@ -16,7 +16,7 @@ import com.weatherapp.util.UnixConverter;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,8 +86,8 @@ public class CitiesService {
 
     private void createAndSaveCityMeasurementData(City city, WeatherData weatherData) {
         Measurement measurement = measurementMapper.toMeasurement(weatherData.getMain());
-        Instant localDateTime = UnixConverter.getLocalDateTime(weatherData.getDt());
-        measurement.setDateTime(localDateTime);
+        LocalTime localTime = UnixConverter.getLocalTime(weatherData.getDt());
+        measurement.setTime(localTime);
         measurement.setWindSpeed(weatherData.getWind().getSpeed());
         measurement.setCity(city);
         measurementsService.saveCityMeasurementData(measurement);

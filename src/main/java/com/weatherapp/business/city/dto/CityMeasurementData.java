@@ -1,5 +1,6 @@
-package com.weatherapp.domain.measurement;
+package com.weatherapp.business.city.dto;
 
+import com.weatherapp.domain.measurement.Measurement;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalTime;
 
 /**
  * DTO for {@link Measurement}
@@ -23,5 +25,5 @@ public class CityMeasurementData implements Serializable {
     @NotNull
     private Integer humidity;
     @NotNull
-    private Instant dateTime;
+    private LocalTime time;
 }

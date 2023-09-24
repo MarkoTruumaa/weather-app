@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -37,7 +37,7 @@ public class Measurement {
     private Integer humidity;
 
     @NotNull
-    @Column(name = "date_time", nullable = false)
-    private Instant dateTime;
+    @Column(name = "\"time\"", nullable = false)
+    private LocalTime time;
 
 }

@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-09-24 11:00:56.341
+-- Last modification date: 2023-09-24 18:08:59.59
 
 -- tables
 -- Table: city
@@ -17,10 +17,10 @@ CREATE TABLE city (
 CREATE TABLE measurement (
     id serial  NOT NULL,
     city_id int  NOT NULL,
-    temperature decimal(5,2)  NOT NULL,
+    temperature decimal(5,1)  NOT NULL,
     wind_speed int  NOT NULL,
     humidity int  NOT NULL,
-    date_time timestamp  NOT NULL,
+    time time  NOT NULL,
     CONSTRAINT measurement_pk PRIMARY KEY (id)
 );
 

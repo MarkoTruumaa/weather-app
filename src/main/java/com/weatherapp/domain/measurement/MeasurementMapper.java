@@ -1,5 +1,6 @@
 package com.weatherapp.domain.measurement;
 
+import com.weatherapp.business.city.dto.CityMeasurementData;
 import com.weatherapp.business.data.dto.Main;
 import org.mapstruct.*;
 

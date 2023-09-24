@@ -1,7 +1,7 @@
 package com.weatherapp.business.city;
 
 import com.weatherapp.business.city.dto.CityBasicInfo;
-import com.weatherapp.domain.measurement.CityMeasurementData;
+import com.weatherapp.business.city.dto.CityMeasurementData;
 import com.weatherapp.infrastructure.error.ApiError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
