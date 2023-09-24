@@ -8,6 +8,7 @@ public class UnixConverter {
 
     public static Instant getLocalDateTime(long timestamp) {
         Instant instant = Instant.ofEpochSecond(timestamp);
-        return instant.atZone(ZoneId.systemDefault()).toInstant();
+        ZoneId customZone = ZoneId.of("Etc/GMT+2");
+        return instant.atZone(customZone).toInstant();
     }
 }

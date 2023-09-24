@@ -3,13 +3,11 @@ package com.weatherapp.business.city;
 import com.weatherapp.business.data.DataService;
 import com.weatherapp.business.Status;
 import com.weatherapp.business.city.dto.CityInfo;
-import com.weatherapp.business.data.dto.CurrentWeather;
 import com.weatherapp.business.data.dto.WeatherData;
 import com.weatherapp.domain.city.City;
 import com.weatherapp.domain.city.CityMapper;
 import com.weatherapp.domain.city.CityService;
-import com.weatherapp.domain.citymeasurement.CityMeasurement;
-import com.weatherapp.domain.citymeasurement.CityMeasurementService;
+import com.weatherapp.domain.measurement.CityMeasurementData;
 import com.weatherapp.domain.measurement.Measurement;
 import com.weatherapp.domain.measurement.MeasurementMapper;
 import com.weatherapp.domain.measurement.MeasurementsService;
@@ -34,8 +32,6 @@ public class CitiesService {
     private MeasurementMapper measurementMapper;
     @Resource
     private MeasurementsService measurementsService;
-    @Resource
-    private CityMeasurementService cityMeasurementService;
 
 
     public void addCityToDatabase(String cityName) {
@@ -43,6 +39,25 @@ public class CitiesService {
         checkAndUpdateCityWithDeletedStatus(cityName);
         CityInfo cityInfo = dataService.getCityData(cityName);
         City city = cityMapper.toCity(cityInfo);
+        cityService.saveCity(city);
+    }
+
+    public void getCitiesMeasurementData() {
+        List<City> allActiveCities = cityService.findAllActiveCities();
+        if (allActiveCities.isEmpty()) {
+            return;
+        }
+        for (City city : allActiveCities) {
+            WeatherData weatherData = dataService.getWeatherMeasurementData(city);
+            createAndSaveCityMeasurementData(city, weatherData);
+
+        }
+
+    }
+
+    public void deleteCity(Integer cityId) {
+        City city = cityService.getCityBy(cityId);
+        city.setStatus(Status.DELETED.getLetter());
         cityService.saveCity(city);
     }
 
@@ -55,23 +70,21 @@ public class CitiesService {
         }
     }
 
-    public void getCitiesMeasurementData() {
-        List<City> allActiveCities = cityService.findAllActiveCities();
-        for (City city : allActiveCities) {
-            WeatherData weatherData = dataService.getWeatherMeasurementData(city);
+    private void createAndSaveCityMeasurementData(City city, WeatherData weatherData) {
+        Measurement measurement = measurementMapper.toMeasurement(weatherData.getMain());
+        Instant localDateTime = UnixConverter.getLocalDateTime(weatherData.getDt());
+        measurement.setDateTime(localDateTime);
+        measurement.setWindSpeed(weatherData.getWind().getSpeed());
+        measurement.setCity(city);
+        measurementsService.saveCityMeasurementData(measurement);
+    }
 
-            CurrentWeather currentWeather = weatherData.getCurrentWeather();
-            Measurement measurement = measurementMapper.toMeasurement(currentWeather);
-            Instant localDateTime = UnixConverter.getLocalDateTime(currentWeather.getDt());
-            measurement.setDateTime(localDateTime);
-            measurementsService.saveMeasurementData(measurement);
+    public List<City> findAllCities() {
+        return cityService.findAllActiveCities();
+    }
 
-            CityMeasurement cityMeasurement = new CityMeasurement();
-            cityMeasurement.setMeasurement(measurement);
-            cityMeasurement.setCity(city);
-            cityMeasurementService.saveCityMeasurementData(cityMeasurement);
-
-        }
-
+    public List<CityMeasurementData> findCityWeatherData(Integer cityId) {
+        List<Measurement> measurementsData = measurementsService.getMeasurementDataBy(cityId);
+        return measurementMapper.toCityMeasurementsData(measurementsData);
     }
 }

@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-09-23 14:38:07.619
+-- Last modification date: 2023-09-24 11:00:56.341
 
 -- tables
 -- Table: city
@@ -13,37 +13,22 @@ CREATE TABLE city (
     CONSTRAINT city_pk PRIMARY KEY (id)
 );
 
--- Table: city_measurement
-CREATE TABLE city_measurement (
-    id serial  NOT NULL,
-    city_id int  NOT NULL,
-    measurement_id int  NOT NULL,
-    CONSTRAINT city_measurement_pk PRIMARY KEY (id)
-);
-
 -- Table: measurement
 CREATE TABLE measurement (
     id serial  NOT NULL,
+    city_id int  NOT NULL,
     temperature decimal(5,2)  NOT NULL,
     wind_speed int  NOT NULL,
     humidity int  NOT NULL,
-    date timestamp  NOT NULL,
+    date_time timestamp  NOT NULL,
     CONSTRAINT measurement_pk PRIMARY KEY (id)
 );
 
 -- foreign keys
--- Reference: city_measurement_city (table: city_measurement)
-ALTER TABLE city_measurement ADD CONSTRAINT city_measurement_city
+-- Reference: measurement_city (table: measurement)
+ALTER TABLE measurement ADD CONSTRAINT measurement_city
     FOREIGN KEY (city_id)
     REFERENCES city (id)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
-
--- Reference: city_measurement_measurement (table: city_measurement)
-ALTER TABLE city_measurement ADD CONSTRAINT city_measurement_measurement
-    FOREIGN KEY (measurement_id)
-    REFERENCES measurement (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;

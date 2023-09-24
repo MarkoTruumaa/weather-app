@@ -23,7 +23,7 @@ public class UrlConstructor {
 
         return stringBuilder.append(WebAddress.WEATHER_MAP_URL_MEASUREMENTS.getUrl())
                 .append("lat=").append(city.getLatitude())
-                .append("&lon=").append(city.getLongitude()).append("&exclude=minutely,hourly,daily,alerts")
+                .append("&lon=").append(city.getLongitude())
                 .append("&units=metric")
                 .append("&appid=").append(API_KEY).toString();
 

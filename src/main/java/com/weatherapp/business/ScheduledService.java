@@ -11,7 +11,7 @@ public class ScheduledService {
     @Resource
     private CitiesService citiesService;
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 900000)
     public void activateService() {
         citiesService.getCitiesMeasurementData();
     }

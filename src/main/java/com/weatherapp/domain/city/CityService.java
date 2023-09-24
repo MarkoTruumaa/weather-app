@@ -32,4 +32,8 @@ public class CityService {
     public List<City> findAllActiveCities() {
         return cityRepository.findAllBy(Status.ACTIVE.getLetter());
     }
+
+    public City getCityBy(Integer cityId) {
+        return cityRepository.getReferenceById(cityId);
+    }
 }

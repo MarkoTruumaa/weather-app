@@ -1,5 +1,6 @@
 package com.weatherapp.domain.measurement;
 
+import com.weatherapp.domain.city.City;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -19,6 +20,11 @@ public class Measurement {
     private Integer id;
 
     @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
+
+    @NotNull
     @Column(name = "temperature", nullable = false, precision = 5, scale = 2)
     private BigDecimal temperature;
 
@@ -31,7 +37,7 @@ public class Measurement {
     private Integer humidity;
 
     @NotNull
-    @Column(name = "date", nullable = false)
+    @Column(name = "date_time", nullable = false)
     private Instant dateTime;
 
 }
