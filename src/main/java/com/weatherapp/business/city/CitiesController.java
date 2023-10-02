@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/city")
 public class CitiesController {
 
     @Resource
     private CitiesService citiesService;
 
 
-    @GetMapping("/cities")
+    @GetMapping("/all")
     @Operation(summary = "Leiab andmebaasist kõik linnad",
             description = """
                     Tagastab kõikide leitud linnade cityId ja cityName-i""")
@@ -28,7 +29,7 @@ public class CitiesController {
         return citiesService.findAllCities();
     }
 
-    @GetMapping("/city")
+    @GetMapping("")
     @Operation(summary = "Leiab andmebaasist ühe linna ilmainfo",
             description = """
                     Leiab andmebaasist cityId järgi linna ja tagastab selle linna ilmainfo""")
@@ -36,7 +37,7 @@ public class CitiesController {
         return citiesService.findCityWeatherData(cityId);
     }
 
-    @PostMapping("/city")
+    @PostMapping("")
     @Operation(summary = "Uue linna lisamine andmebaasi.",
             description = "Kontrollib cityName järgi kas linn on juba andmebaasis ja mis on tema status. " +
                     "Kui linna ei ole siis lisab uue linna")
@@ -48,7 +49,7 @@ public class CitiesController {
         citiesService.addCity(cityName);
     }
 
-    @DeleteMapping("/city")
+    @DeleteMapping("")
     @Operation(summary = "Kustutab linna andmebaasist",
             description = """
                     Leiab andmebaasist cityId järgi linna ja muudab selle statuse active -> deleted""")
